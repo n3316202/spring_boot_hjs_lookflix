@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+<style type="text/css">
+	
+	.container{
+	  height: 70px;
+	  width: 100%;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  z-index: 10;
+	  padding: 0 30px 0 30px;
+	  background-color: rgba(0, 0, 0, 0.4);
+	  backdrop-filter: blur(3px);
+	  margin-bottom: 250px;
+	}
+	
+	ul{
+	  	display: flex;
+  		align-items: center;
+  		height: 100%;	
+	}
+	
+	.title{
+  		width: 80%;
+  		font-size: 30px;
+  		font-weight: 800;
+  		color: #e50914;
+  		margin-left: 20px;
+		
+/* 		@media (max-width: 768px) {
+		    font-size: 24px;
+		    margin-left: 0;
+		}	 */
+	}
+	
+	li{
+		  width: 140px;
+		  font-size: 20px;
+		  transition: all 0.2s ease-in-out;
+		  display: flex;
+		  justify-content: center;
+		  height: 100%;
+		  align-items: center;
+		  /* border-bottom: 3px solid; */
+		  color: white;
+		  opacity:0.6;
+	}
+</style>
+
+</head>
+<body>
+  <div class="container">
+    <ul>
+      <span class="title"><a href="#">LookFlix</a></span>
+      <li><a href="#">홈</a></li>
+      <li>TV</li>
+      <li>영화</li>
+      <li>검색</li> 
+    </ul>
+  </div>
+  
+</body>
+</html>

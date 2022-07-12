@@ -139,7 +139,9 @@
 	}
 	/* sc-hUpaCq gvOHLt */	 
 	.movie_photo{
-	    /* background: url(https://image.tmdb.org/t/p/original//mpOQpOKdo2XJnTqRzo1lTmDNsc1.jpg) no-repeat center center; */
+	    background-image: url('https://image.tmdb.org/t/p/original//mpOQpOKdo2XJnTqRzo1lTmDNsc1.jpg'); 
+	    background-repeat : no-repeat;
+	    background-position:center;
 	    background-size: cover;
 	    height: 340px;
 	    -webkit-transition: 0.2s linear;
@@ -200,14 +202,14 @@
     <div class="main_h1" >인기 TV 프로그램</div>
     <div class="section_container">
         <div class="section_contents">
-    		<div id="id_movie_post" class="movie_post">
-    			<a href=""></a>
-    			<div class="movie_photo"></div>
-    			<div class="movie_details">
-    				<div class="movie_details_title">기묘한 이야기</div>
-    				<div class="movie_details_year">2016</div>
-    			</div>    			
-    		</div>
+	    		<div id="id_movie_post" class="movie_post">
+	    			<a href=""></a>
+	    			<div class="movie_photo"></div>
+	    			<div class="movie_details">
+	    				<div class="movie_details_title">기묘한 이야기</div>
+	    				<div class="movie_details_year">2016</div>
+	    			</div>    			
+	    		</div>
     	</div>
     </div>
   </main>
@@ -222,36 +224,32 @@ $(document).ready( function() {
             data: { "api_key": "761b201bf66269aa06a33c1d922810c2", "language" : "ko" },
             dataType: "json",
             success: function (movies, status, xhr) {
-				console.log(movies);
-				
-				$("#id_movie_post").hide();
-				let post = $("#id_movie_post");
-				let imagePath = 'https://image.tmdb.org/t/p/original/';
-				
-				$(movies.results).each(function(i, item) {
-					
-					post = post.clone().attr("id", "id_movie_post" +"_" + i);
-					post.show();
-					
-					console.log(this.backdrop_path);
-					
-					post.find(".movie_details_title").text(this.name);
-					
-					var test = $("#id_movie_post").clone().children(".movie_photo");
-					
-					console.log(post.attr("id"));
-					
-					 
-					
-					/* post.find(".movie_photo").css({
-						'background':'url(' + imagePath + this.backdrop_path + 'no-repeat center center' + ')'					
-					}); */
-					console.log(post.find(".movie_photo").css("background"));
-					console.log(post.find(".movie_photo").css("height"));
-					
-					
-					$(".section_contents").append(post);
-				});
+              
+							console.log(movies);
+							
+							$("#id_movie_post").hide();
+							let post = $("#id_movie_post");
+							let imagePath = 'https://image.tmdb.org/t/p/original/';
+							
+							$(movies.results).each(function(i, item) {
+								
+								post = post.clone();
+								post.show();
+								
+								console.log(this.backdrop_path);								
+								post.find(".movie_details_title").text(this.name);
+								
+								var text = post.find(".movie_photo").css("background");
+							  console.log(text);
+
+								var url = imagePath + this.backdrop_path;
+								
+								post.find(".movie_photo").css("background-image", `url(${url})`);								 
+								console.log(post.find(".movie_photo").css("background"));
+																
+								$(".section_contents").append(post);
+								            
+							 });
 					
             },
             error: function (xhr, status, error) {
@@ -265,20 +263,6 @@ $(document).ready( function() {
 });
 
 </script>
-
-
-  
-<!--   <div class="page_header_container">
-    <div  class="page_title_container">
-      <div class="page_title">인기영화</div>
-      <div class="page_sub_title">현재 인기 있는 영화 목록을 가져옵니다.</div>
-      <div class="page_sub_title">영화 목록은 매일 자동 업데이트됩니다.</div>      
-    </div>
-  </div> -->
-  
-  
-  
-  
-  
+ 
 </body>
 </html>

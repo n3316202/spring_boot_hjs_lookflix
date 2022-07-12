@@ -8,7 +8,7 @@
 <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 	
 	.container{
@@ -113,15 +113,74 @@
     width: 100%;
   }
   
-   .section_content{
-		  display: flex;
-		  justify-content: center;
-		  max-width: 2400px;
-		  flex-wrap: wrap;
-		  @media (max-width: 768px) {
-		    justify-content: space-between;
-		  }
-  }
+  .section_contents{
+		display: flex;
+		justify-content: center;
+		max-width: 2400px;
+		flex-wrap: wrap;
+		
+		@media (max-width: 768px) {
+			justify-content: space-between;
+			-webkit-box-pack: justify;
+		}
+	}
+	
+	/* sc-AjmGg jZuPWY */
+	.movie_post{
+	    font-size: 12px;
+	    -webkit-transition: 0.2s linear;
+	    transition: 0.2s linear;
+	    width: 220px;
+	    margin: 10px;
+	 
+	 @media (max-width: 768px) {
+		width: 140px;
+	 }
+	}
+	/* sc-hUpaCq gvOHLt */	 
+	.movie_photo{
+	    /* background: url(https://image.tmdb.org/t/p/original//mpOQpOKdo2XJnTqRzo1lTmDNsc1.jpg) no-repeat center center; */
+	    background-size: cover;
+	    height: 340px;
+	    -webkit-transition: 0.2s linear;
+	    transition: 0.2s linear;
+	    border-radius: 8px;
+		
+		@media (max-width: 768px){
+			height: 220px;
+		}
+	}
+	/* sc-jgrJph fajUVx */
+	.movie_details{
+	    display: -webkit-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	    flex-direction: column;
+	    -webkit-align-items: center;
+	    -webkit-box-align: center;
+	    -ms-flex-align: center;
+	    align-items: center;
+	    line-height: 1.3;	
+	}
+	/* sc-gSQFLo juKeBQ */
+	.movie_details_title{
+    	font-size: 18px;
+	}
+	
+	/* sc-iNGGcK bSPPox */
+	.movie_details_year{
+    	opacity: 0.6;
+    	font-size: 14px;
+	}
+	
+	/* 평점 */
+	.movie_details_points{
+    	font-size: 14px;
+	}
+	
 	
 </style>
 
@@ -139,9 +198,75 @@
   
   <main class="main_container">
     <div class="main_h1" >인기 TV 프로그램</div>
+    <div class="section_container">
+        <div class="section_contents">
+    		<div id="id_movie_post" class="movie_post">
+    			<a href=""></a>
+    			<div class="movie_photo"></div>
+    			<div class="movie_details">
+    				<div class="movie_details_title">기묘한 이야기</div>
+    				<div class="movie_details_year">2016</div>
+    			</div>    			
+    		</div>
+    	</div>
+    </div>
   </main>
+
+<script type="text/javascript">
+$(document).ready( function() {
+	
+	function getMoviePopular() {
+		
+        $.ajax({
+            url: "https://api.themoviedb.org/3/tv/popular",
+            data: { "api_key": "761b201bf66269aa06a33c1d922810c2", "language" : "ko" },
+            dataType: "json",
+            success: function (movies, status, xhr) {
+				console.log(movies);
+				
+				$("#id_movie_post").hide();
+				let post = $("#id_movie_post");
+				let imagePath = 'https://image.tmdb.org/t/p/original/';
+				
+				$(movies.results).each(function(i, item) {
+					
+					post = post.clone().attr("id", "id_movie_post" +"_" + i);
+					post.show();
+					
+					console.log(this.backdrop_path);
+					
+					post.find(".movie_details_title").text(this.name);
+					
+					var test = $("#id_movie_post").clone().children(".movie_photo");
+					
+					console.log(post.attr("id"));
+					
+					 
+					
+					/* post.find(".movie_photo").css({
+						'background':'url(' + imagePath + this.backdrop_path + 'no-repeat center center' + ')'					
+					}); */
+					console.log(post.find(".movie_photo").css("background"));
+					console.log(post.find(".movie_photo").css("height"));
+					
+					
+					$(".section_contents").append(post);
+				});
+					
+            },
+            error: function (xhr, status, error) {
+                console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+            }
+        });
+    }
   
-  
+	getMoviePopular();
+	
+});
+
+</script>
+
+
   
 <!--   <div class="page_header_container">
     <div  class="page_title_container">
